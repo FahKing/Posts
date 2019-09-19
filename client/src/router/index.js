@@ -7,11 +7,6 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'helloWorld',
-    //   component: () => import('@/components/HelloWorld.vue')
-    // },
     {
       path: '/posts',
       name: 'posts',

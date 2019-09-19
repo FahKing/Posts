@@ -3,8 +3,13 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 // schema object > new Schema(object, option)
 var PostSchema = new Schema({
-  title: String,
-  description: String
+  filename: String,
+  hash: String,
+  fileid: String,
+  secretkey: String,
+  nameupload: String,
+  namedownload: String,
+  namedelete: String
 });
 // สร้าง Model เพื่อนำไปใช้ในการ Mongoose CRUD
 // mongoose.model(name, schema)

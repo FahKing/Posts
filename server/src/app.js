@@ -17,7 +17,7 @@ var Post = require('../models/post')
 // READ
 // get data db
 app.get('/posts', (req, res) => {
-  Post.find({}, 'title description', function (error, posts) {
+  Post.find({}, 'filename hash fileid secretkey nameupload namedownload namedelete', function (error, posts) {
     if (error) { console.error(error); }
     res.send({
       posts: posts
@@ -25,20 +25,27 @@ app.get('/posts', (req, res) => {
   }).sort({_id:-1})
 })
 
-// var Data = require("../routes/getData")
-// app.use('/postdata', Data)
-
 // CREATE
 // add to table_db
 app.post('/add_post', (req, res) => {
   var db = req.db;
-  var title = req.body.title;
-  var description = req.body.description;
-  var new_post = new Post({
-    title: title,
-    description: description
-  })
+  var filename = req.body.filename;
+  var hash = req.body.hash;
+  var fileid = req.body.fileid;
+  var secretkey = req.body.secretkey;
+  var nameupload = req.body.nameupload;
+  var namedownload = req.body.namedownload;
+  var namedelete = req.body.namedelete
 
+  var new_post = new Post({
+    filename: filename,
+	hash: hash,
+	fileid: fileid,
+	secretkey: secretkey,
+	nameupload: nameupload,
+	namedownload: namedownload,
+	namedelete: namedelete
+  })
   new_post.save(function (error) {
     if (error) {
       console.log(error)
@@ -53,21 +60,25 @@ app.post('/add_post', (req, res) => {
 // //Fetch single post 
 app.get('/post/:id', (req, res) => {
 	var db = req.db;
-	Post.findById(req.params.id, 'title description', function (error, post) {
+	Post.findById(req.params.id, 'filename hash fileid secretkey nameupload namedownload namedelete', function (error, post) {
 	  if (error) { console.error(error); }
 	  res.send(post)
 	})
 })
-
 // // UPDATE => Put /posts by id
 // // put a data to db
 app.put('/posts/:id', (req, res) => {
 	var db = req.db;
-	Post.findById(req.params.id, 'title description', function (error, post) {
+	Post.findById(req.params.id, 'filename hash fileid secretkey nameupload namedownload namedelete', function (error, post) {
 	  if (error) { console.error(error); }
+	  post.filename = req.body.filename
+	  post.hash = req.body.hash
+	  post.fileid = req.body.fileid
+	  post.secretkey = req.body.secretkey
+	  post.nameupload = req.body.nameupload
+	  post.namedownload = req.body.namedownload
+	  post.namedelete = req.body.delete
 
-	  post.title = req.body.title
-	  post.description = req.body.description
 	  post.save(function (error) {
 			if (error) {
 				console.log(error)

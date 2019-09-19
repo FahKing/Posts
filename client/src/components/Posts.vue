@@ -9,14 +9,24 @@
 
       <table>
         <tr>
-          <td>Title</td>
-          <td width="550">Description</td>
-          <td width="100" align="center">Action</td>
+          <td> File Name</td>
+          <td> Hash</td>
+          <td> File ID</td>
+          <td> Secret Key</td>
+          <td> Name Upload</td>
+          <td> Name Download</td>
+          <td> Name Delete</td>
+          <td width="100" align="center"> Action </td>
         </tr>
 
         <tr v-for="post in posts" v-bind:key="post.id">
-          <td>{{ post.title }}</td>
-          <td>{{ post.description }}</td>
+          <td>{{ post.filename }}</td>
+          <td>{{ post.hash }}</td>
+          <td>{{ post.fileid }}</td>
+          <td>{{ post.secretkey }}</td>
+          <td>{{ post.nameupload }}</td>
+          <td>{{ post.namedownload }}</td>
+          <td>{{ post.namedelete }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'editpost', params: { id: post._id } }">Edit</router-link> |
             <a href="#" @click="deletePost(post._id)">Delete</a>

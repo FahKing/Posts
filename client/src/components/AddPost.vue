@@ -3,13 +3,31 @@
     <h1>Add Posts</h1>
     <div class="form">
         <div>
-            <input type="text" name="title" placeholder="TITLE" v-model="title">
+            <input type="text" name="filename" placeholder="File Name" v-model="filename">
         </div>
         <div>
+            <input type="text" name="hash" placeholder="Hash" v-model="hash">
+        </div>
+        <div>
+            <input type="text" name="fileid" placeholder="File ID" v-model="fileid">
+        </div>
+        <div>
+            <input type="text" name="secretkey" placeholder="Secret Key" v-model="secretkey">
+        </div>
+        <div>
+            <input type="text" name="nameupload" placeholder="Name for Upload" v-model="nameupload">
+        </div>
+        <div>
+            <input type="text" name="namedownload" placeholder="Name for Download" v-model="namedownload">
+        </div>
+        <div>
+            <input type="text" name="namedelete" placeholder="Name for Delete" v-model="namedelete">
+        </div>
+        <!-- <div>
           <textarea cols="15" rows="10" placeholder="DESCRIPTION" v-model="description"></textarea>
-        </div>
+        </div> -->
         <div>
-          <button class="app_post_btn" @click="addPost">Add</button>
+          <button class="app_post_btn" @click="addPost">UPLOAD</button>
         </div>
     </div>
 </div>
@@ -17,19 +35,31 @@
 
 <script>
 import postService from '@/services/postService'
+
 export default {
-  name: 'addpost',
+  // name: 'addpost',
+
   data () {
     return {
-      title: '',
-      description: ''
+      filename: '',
+      hash: '',
+      fileid: '',
+      secretkey: '',
+      nameupload: '',
+      namedownload: '',
+      namedelete: ''
     }
   },
   methods: {
     async addPost () {
       await postService.addPost({
-        title: this.title,
-        description: this.description
+        filename: this.filename,
+        hash: this.hash,
+        fileid: this.fileid,
+        secretkey: this.secretkey,
+        nameupload: this.nameupload,
+        namedownload: this.namedownload,
+        namedelete: this.namedelete
       })
       this.$router.push({ name: 'posts' })
     }
